@@ -30,15 +30,16 @@ public class Main {
                 .collect ( Collectors.toList ( ) );
         System.out.println ( "2.Список фамилий призывников: " + draftList );
 
-        List<String> higherEducation = personList.stream ( )
+        List<Person> higherEducation = personList.stream ( )
                 .filter ( x -> x.getAge ( ) >= 18 )
                 .filter ( x -> x.getSex ( ).equals ( Sex.WOMAN ) && x.getAge ( ) < 60 ||
                         x.getSex ( ).equals ( Sex.MAN ) && x.getAge ( ) < 65 )
                 .filter ( x -> x.getEducation ( ).equals ( Education.HIGHER ) )
-                .map ( Person::getFamily )
                 .limit ( 10 )
-                .sorted ( Comparator.naturalOrder ( ) )
+                .sorted ( Comparator.comparing ( Person::getFamily ) )
                 .collect ( Collectors.toList ( ) );
         System.out.println ( "3.Потенциально работоспособные люди с высшим образованием: " + higherEducation );
     }
 }
+
+
